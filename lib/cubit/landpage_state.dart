@@ -1,17 +1,17 @@
 part of 'landpage_cubit.dart';
 
-enum Page { stopwatch, timer }
+enum PageList { stopwatch, timer }
 
 @immutable
 abstract class LandpageState {
   const LandpageState(this.currentPage);
-  final Page currentPage;
+  final PageList currentPage;
 }
 
 class LandpageInitial extends LandpageState {
-  const LandpageInitial(Page initialPage) : super(initialPage);
+  const LandpageInitial(PageList initialPage) : super(initialPage);
 }
 
 class LandpageNewState extends LandpageState {
-  const LandpageNewState(Page page) : super(page);
+  const LandpageNewState(PageList page) : super(page);
 }

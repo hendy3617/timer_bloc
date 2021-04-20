@@ -7,10 +7,9 @@ class StopwatchPage extends StatelessWidget {
   const StopwatchPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StopwatchCubit, StopwatchState>(
-      builder: (context, state) {
-        return StopwatchBody();
-      },
+    return BlocProvider(
+      create: (context) => StopwatchCubit(),
+      child: StopwatchBody(),
     );
   }
 }

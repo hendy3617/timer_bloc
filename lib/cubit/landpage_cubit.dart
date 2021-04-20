@@ -4,13 +4,13 @@ import 'package:meta/meta.dart';
 part 'landpage_state.dart';
 
 class LandpageCubit extends Cubit<LandpageState> {
-  LandpageCubit() : super(const LandpageInitial(Page.stopwatch));
+  LandpageCubit() : super(const LandpageInitial(PageList.stopwatch));
 
   void gotoStopwatchPage() {
-    emit(const LandpageNewState(Page.stopwatch));
+    emit(const LandpageNewState(PageList.stopwatch));
   }
 
   void gotoTimerPage() {
-    emit(const LandpageNewState(Page.timer));
+    emit(const LandpageNewState(PageList.timer));
   }
 }

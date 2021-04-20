@@ -7,10 +7,9 @@ class TimerPage extends StatelessWidget {
   const TimerPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TimerBloc, TimerState>(
-      builder: (context, state) {
-        return TimerBody();
-      },
+    return BlocProvider(
+      create: (context) => TimerBloc(),
+      child: TimerBody(),
     );
   }
 }
