@@ -7,6 +7,7 @@ class CounterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Bloc Bloc Bloc!')),
       body: const CounterBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
