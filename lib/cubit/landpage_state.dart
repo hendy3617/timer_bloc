@@ -15,3 +15,11 @@ class LandpageInitial extends LandpageState {
 class LandpageNewState extends LandpageState {
   const LandpageNewState(PageList page) : super(page);
 }
+
+class LandpageStopwatch extends LandpageState {
+  const LandpageStopwatch() : super(PageList.stopwatch);
+}
+
+class LandpageTimer extends LandpageState {
+  const LandpageTimer() : super(PageList.timer);
+}

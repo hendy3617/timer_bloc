@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timer_bloc/observer.dart';
 import 'package:timer_bloc/stopwatch/stopwatch.dart';
 import 'package:timer_bloc/timer/timer.dart';
 

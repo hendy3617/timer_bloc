@@ -9,7 +9,7 @@ class StopwatchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => StopwatchCubit(),
-      child: StopwatchBody(),
+      child: const StopwatchBody(),
     );
   }
 }

@@ -7,10 +7,10 @@ class LandpageCubit extends Cubit<LandpageState> {
   LandpageCubit() : super(const LandpageInitial(PageList.stopwatch));
 
   void gotoStopwatchPage() {
-    emit(const LandpageNewState(PageList.stopwatch));
+    emit(const LandpageStopwatch());
   }
 
   void gotoTimerPage() {
-    emit(const LandpageNewState(PageList.timer));
+    emit(const LandpageTimer());
   }
 }
