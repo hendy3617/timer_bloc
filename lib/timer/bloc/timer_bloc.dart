@@ -11,9 +11,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   TimerBloc() : super(TimerInitial()) {}
 
   final _currentTimers = <TimerModel>[];
-  bool _isPlaying = false;
-
-  bool get isPlaying => _isPlaying;
+  TimerModel? _modelTicking;
 
   @override
   Stream<TimerState> mapEventToState(
@@ -22,42 +20,51 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     if (event is TimerAdd) {
       print('Event add');
       _addTimer(event.model);
-    } else if (event is TimerDelete) {
+      yield TimerNewState(_currentTimers);
+    }
+    if (event is TimerDelete) {
       print('Event delete');
       _deleteById(event.id);
-    } else if (event is TimerPlay) {
-      _startById(event.id);
-      print('Event play');
-    } else if (event is TimerStop) {
-      _stopById(event.id);
-      print('Event stop');
-    } else if (event is TimerUpdate) {
-      _updateTimer(event.model);
-    } else if (event is TimerUpdateElapsed) {
-      // Do nothing, it update itself internally we only propagate their new state
-    } else {
-      print('Uncaught event: ${event.runtimeType}');
-      return;
+      yield TimerNewState(_currentTimers);
     }
 
-    yield TimerNewState(_currentTimers, _isPlaying);
+    if (event is TimerPlay) {
+      print('Event play');
+      _startById(event.id);
+      yield TimerStateTicking(_currentTimers, _modelTicking!);
+    }
+
+    if (event is TimerStop) {
+      print('Event stop');
+      _stopById(event.id);
+      yield TimerNewState(_currentTimers);
+    }
+
+    if (event is TimerUpdate) {
+      _updateTimer(event.model);
+      yield TimerNewState(_currentTimers);
+    }
+
+    if (event is TimerUpdateElapsed) {
+      yield TimerStateTicking(_currentTimers, _modelTicking!);
+    }
   }
 
   void _startById(int id) {
-    _isPlaying = true;
-    _findById(id).startTimer();
+    final model = _findById(id);
+    model.startTimer();
+    _modelTicking = model;
   }
 
   void _stopById(int id) {
-    _isPlaying = false;
     _findById(id).stopTimer();
+    _modelTicking = null;
   }
 
   void _deleteById(int id) {
     final candidate = _findById(id);
     candidate.close();
     _currentTimers.remove(candidate);
-    if (_isPlaying) _isPlaying = false;
   }
 
   void _addTimer(TimerModel model) {

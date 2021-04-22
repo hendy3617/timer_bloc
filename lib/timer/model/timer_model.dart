@@ -48,6 +48,7 @@ class TimerModel {
   // Close this model before being discarded
   void close() {
     _caller?.cancel();
+    _isPlaying = false;
     _stopwatch.stop();
   }
 
@@ -63,8 +64,11 @@ class TimerModel {
 
   String _formattedTime() {
     final left = timeLeft().inSeconds;
+    final hours = '${(left ~/ 3600) % 24}'.padLeft(2, '0');
+    final minutes = '${(left ~/ 60) % 60}'.padLeft(2, '0');
+    final seconds = '${left % 60}'.padLeft(2, '0');
 
-    return '${(left ~/ 3600) % 24}:${(left ~/ 60) % 60}:${left % 60}';
+    return '$hours:$minutes:$seconds';
   }
 
   Duration timeLeft() {
@@ -72,6 +76,10 @@ class TimerModel {
   }
 
   void _snitcher(Timer timer) {
+    if (timeLeft() <= Duration.zero) {
+      stopTimer();
+      return;
+    }
     bloc.add(TimerUpdateElapsed());
   }
 }

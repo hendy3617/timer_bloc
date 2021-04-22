@@ -13,21 +13,21 @@ class AddTimerPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              child: const Text('1 Minute'),
+              child: const Text('10 Seconds'),
               onPressed: () {
-                _returnTime(context, const Duration(minutes: 1));
+                _returnTime(context, const Duration(seconds: 10));
               },
             ),
             ElevatedButton(
-              child: const Text('2 Minute'),
+              child: const Text('20 Seconds'),
               onPressed: () {
-                _returnTime(context, const Duration(minutes: 2));
+                _returnTime(context, const Duration(seconds: 20));
               },
             ),
             ElevatedButton(
-              child: const Text('3 Minute'),
+              child: const Text('30 Seconds'),
               onPressed: () {
-                _returnTime(context, const Duration(minutes: 3));
+                _returnTime(context, const Duration(seconds: 30));
               },
             ),
           ],

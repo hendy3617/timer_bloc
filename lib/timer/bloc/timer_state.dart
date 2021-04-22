@@ -9,10 +9,16 @@ abstract class TimerState {
 }
 
 class TimerInitial extends TimerState {
-  TimerInitial() : super([], false);
+  TimerInitial({List<TimerModel>? models}) : super(models ?? [], false);
 }
 
 class TimerNewState extends TimerState {
-  const TimerNewState(List<TimerModel> timers, bool isPlaying)
-      : super(timers, isPlaying);
+  const TimerNewState(List<TimerModel> timers)
+      : super(timers, false);
+}
+
+class TimerStateTicking extends TimerState {
+  const TimerStateTicking(List<TimerModel> models, this.tickModel) : super(models, true);
+
+  final TimerModel tickModel;
 }
